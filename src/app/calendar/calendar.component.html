@@ -1,0 +1,33 @@
+<div class="calendar-container">
+	<div class="top-display-container">
+	  <div>
+		<div class="topDisplay">
+			<button (click)="changeMonth(-1)" class="button">←</button>
+			<span>{{ displayMonth }}</span>
+			<button (click)="changeMonth(1)" class="button">→</button>
+		</div>
+		<div class="topDisplay">
+			<button (click)="changeMonth(-12)" class="button">←</button>
+			<input [value]="currentDate.getFullYear()" (change)="onYearChange($event)" class="year-input" />
+			<button (click)="changeMonth(12)" class="button">→</button>
+		</div>
+		<div class="topDisplay" *ngIf="!isCurrentDate(referenceDate)">
+			<button (click)="changeToCurrentDay()" class="button">Go To Current Day</button>
+		</div>
+	  </div>
+	</div>
+	<div class="weekdays">
+	  <div *ngFor="let day of weekdays" class="weekday">{{ day }}</div>
+	</div>
+	<div class="calendar">
+	  <div *ngFor="let week of calendar" class="calendar-week">
+		<div *ngFor="let day of week" class="calendar-day" [style.height.px]="computedHeight" >
+		  {{ formatDay(day) }}
+		</div>
+	  </div>
+	  <div class="topDisplay">
+		<input type="number" min="1" max="5" [value]="range" (change)="onRangeChange($event)" class="year-input"/>
+	  </div>
+	</div>
+  </div>
+  

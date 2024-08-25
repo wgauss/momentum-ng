@@ -1,3 +1,7 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { CalendarComponent } from './calendar/calendar.component';
+
+export const routes: Routes = [
+	{ path: 'calendar', component: CalendarComponent },
+];

@@ -1,0 +1,59 @@
+.calendar-container {
+	display: block;
+	justify-content: center;
+	padding: 1rem;
+}
+
+.top-display-container {
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+}
+.topDisplay {
+	display: flex;
+	justify-content: center;
+}
+
+
+.button {
+	margin: 0 0.5rem;
+}
+
+.year-input {
+	width: 50px;
+	text-align: center;
+}
+.calendar{
+
+}
+
+.weekdays, .calendar-week {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.weekday, .calendar-day {
+	width: 125px;
+	border: 1px solid #ccc;
+	display: flex;
+	padding-left: 5px;
+}
+.weekday{
+	justify-content: center;	
+	height: 25px;
+}
+.calendar-day {
+	border-radius: 4px;	
+}
+
+.range-control {
+	display: flex;
+	justify-content: center;
+	padding-top: 1rem;
+}
+
+.range-input {
+	width: 50px;
+	text-align: center;
+}
