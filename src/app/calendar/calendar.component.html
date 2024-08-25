@@ -23,6 +23,12 @@
 	  <div *ngFor="let week of calendar" class="calendar-week">
 		<div *ngFor="let day of week" class="calendar-day" [style.height.px]="computedHeight" >
 		  {{ formatDay(day) }}
+		
+		<div *ngFor="let event of events">
+			<div *ngIf="checkEventDay(event, day)" [ngStyle]="{ 'background-color': event.color }">
+				{{event.title}}
+			</div>
+		</div>
 		</div>
 	  </div>
 	  <div class="topDisplay">

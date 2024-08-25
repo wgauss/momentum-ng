@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, eachDayOfInterval, isSameMonth } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { CommonModule } from '@angular/common';
+import { ScheduleService } from '../schedule.service';
+import { ScheduleItem } from '../schedule.model';
 
 @Component({
   selector: 'app-calendar',
@@ -17,11 +19,14 @@ export class CalendarComponent implements OnInit {
   calendar: Date[][] = [];
   weekdays: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   range: number = 5; // Number of rows (weeks) to display
- height: number = 500; 
+  height: number = 500; 
   computedHeight: number = this.height / this.range; // Height per calendar cell
-
+  events: ScheduleItem[] = [] 
+  constructor(private scheduleService: ScheduleService) { }
+  
   ngOnInit(): void {
     this.updateCalendar();
+	this.loadScheduleItems();
   }
 
   updateCalendar(): void {
@@ -78,5 +83,18 @@ export class CalendarComponent implements OnInit {
 
   isCurrentDate(referenceDate: Date): boolean {
     return this.currentDate.toDateString() === referenceDate.toDateString();
+  }
+
+  loadScheduleItems(): void {
+    this.events = this.scheduleService.getScheduleItems();
+    console.log('Loaded Schedule Items:', this.events);
+  }
+  checkEventDay(event: ScheduleItem, day: Date): boolean{
+	if (!event.date) {
+		return false;
+	  }
+	  const eventDate = new Date(event.date);
+	  const checkDate = new Date(day);
+	return eventDate.toLocaleDateString() == checkDate.toLocaleDateString()
   }
 }
