@@ -14,6 +14,8 @@ button {
 	margin: 0; /* Remove default margin */
 	border: none; /* Remove default border */
 	background: transparent; /* Remove default background */
+	user-select: none;
+
 }
 .buttonFull{
 	background-color: #87ceeb;
@@ -27,7 +29,6 @@ button {
 	background-color: #6ba8c0;
 }
 .buttonFull:active{
-	user-select: none;
 	-webkit-box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.33) inset;
 	-moz-box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.33) inset;
 	box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.33) inset;
@@ -47,7 +48,6 @@ button {
   }
   .buttonOutline:active {
 	background-color: rgba(135, 206, 235, 0.5);
-	user-select: none;
   }
   .buttonGhost {
 	margin: 0 0.5rem;

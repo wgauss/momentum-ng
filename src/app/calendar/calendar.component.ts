@@ -68,10 +68,7 @@ export class CalendarComponent implements OnInit {
   formatDay(day: Date): string {
 	if (day.getMonth() != this.currentDate.getMonth()){
 		return format(day, 'MMMM d');
-	} else if (day.toLocaleDateString() == this.referenceDate.toLocaleDateString()){
-		return format(day, 'MMMM d') + " (Today)";
-	}
-	else {
+	} else {
 		return format(day, 'd'); // 'd' gives the day of the month
 	}
   }
