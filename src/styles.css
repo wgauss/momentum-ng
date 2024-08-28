@@ -3,3 +3,66 @@ html{
 	background-color: #212121;
 	color: white;
 }
+button {
+	all: unset; /* Remove all inherited styles */
+	display: inline-block; /* Make it behave like a block element while allowing inline styling */
+	cursor: pointer; /* Change the cursor to a pointer on hover */
+	font-family: inherit; /* Use the font family from the parent element */
+	font-size: inherit; /* Use the font size from the parent element */
+	line-height: inherit; /* Use the line height from the parent element */
+	padding: 0; /* Remove default padding */
+	margin: 0; /* Remove default margin */
+	border: none; /* Remove default border */
+	background: transparent; /* Remove default background */
+}
+.buttonFull{
+	background-color: #87ceeb;
+	margin: 0 0.5rem;
+	padding:.5rem;
+	border-radius: 3.33px;
+	border: none;
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.buttonFull:hover{
+	background-color: #6ba8c0;
+}
+.buttonFull:active{
+	user-select: none;
+	-webkit-box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.33) inset;
+	-moz-box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.33) inset;
+	box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.33) inset;
+}
+.buttonOutline {
+	border: 1px solid skyblue; /* Base border style */
+	margin: 0 0.5rem;
+	padding: 0.5rem;
+	border-radius: 3.33px;
+	background-color: transparent; /* Ensure background is transparent to see the border */
+	
+	transition: background-color 0.3s ease, border 0.1s ease; /* Include border in transition */
+  }
+  
+  .buttonOutline:hover {
+	background-color: rgba(135, 206, 235, 0.1); 
+  }
+  .buttonOutline:active {
+	background-color: rgba(135, 206, 235, 0.5);
+	user-select: none;
+  }
+  .buttonGhost {
+	margin: 0 0.5rem;
+	padding: 0.5rem;
+	border-radius: 3.33px;
+	background-color: transparent;
+	
+	transition: background-color 0.3s ease, border 0.1s ease; /* Include border in transition */
+  }
+  
+  .buttonGhost:hover {
+	background-color: rgba(135, 206, 235, 0.1); 
+  }
+  .buttonGhost:active {
+	background-color: rgba(135, 206, 235, 0.5);
+	user-select: none;
+  }
+  

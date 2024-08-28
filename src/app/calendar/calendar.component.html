@@ -2,17 +2,18 @@
 	<div class="top-display-container">
 	  <div>
 		<div class="topDisplay">
-			<button (click)="changeMonth(-1)" class="button">←</button>
+			<button (click)="changeMonth(-1)" class="buttonFull">←</button>
 			<span>{{ displayMonth }}</span>
-			<button (click)="changeMonth(1)" class="button">→</button>
+			<button (click)="changeMonth(1)" class="buttonFull">→</button>
 		</div>
+		<hr/>
 		<div class="topDisplay">
-			<button (click)="changeMonth(-12)" class="button">←</button>
+			<button (click)="changeMonth(-12)" class="buttonFull">←</button>
 			<input [value]="currentDate.getFullYear()" (change)="onYearChange($event)" class="year-input" />
-			<button (click)="changeMonth(12)" class="button">→</button>
+			<button (click)="changeMonth(12)" class="buttonFull">→</button>
 		</div>
 		<div class="topDisplay" *ngIf="!isCurrentDate(referenceDate)">
-			<button (click)="changeToCurrentDay()" class="button">Go To Current Day</button>
+			<button (click)="changeToCurrentDay()" class="buttonGhost">Go To Current Day</button>
 		</div>
 	  </div>
 	</div>

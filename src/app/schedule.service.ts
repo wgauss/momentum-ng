@@ -1,4 +1,12 @@
-// schedule.service.ts
+/*
+TODO:
+	make it so that this shit is stored in the json file made,
+	also made better css/positioning for when the events are actually called
+	also integrate routine with recurring events
+	perhaps make a component that creates events... i guess lol
+
+
+*/
 import { Injectable } from '@angular/core';
 import { ScheduleItem } from './schedule.model';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, eachDayOfInterval, isSameMonth } from 'date-fns';
