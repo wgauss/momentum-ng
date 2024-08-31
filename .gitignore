@@ -11,6 +11,14 @@ Angular/node_modules
 Angular/npm-debug.log
 yarn-error.log
 
+# Rails temp files
+rails-api/tmp/
+rails-api/log/
+rails-api/public/assets/
+rails-api/storage/
+rails-api/db/*.sqlite3
+rails-api/db/*.sqlite3-journal
+
 # IDEs and editors
 .idea/
 .project
