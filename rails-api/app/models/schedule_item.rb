@@ -1,0 +1,2 @@
+class ScheduleItem < ApplicationRecord
+end

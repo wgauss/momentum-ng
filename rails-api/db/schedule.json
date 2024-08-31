@@ -1,0 +1,32 @@
+[
+	{
+	  "id": "1",
+	  "date": "2024-08-05",
+	  "weekday": "Monday",
+	  "color": "#33ccff",
+	  "title": "Team Meeting",
+	  "description": "Monthly team meeting to discuss project progress."
+	},
+	{
+	  "id": "2",
+	  "date": "2024-08-07",
+	  "weekday": "Wednesday",
+	  "title": "Doctor Appointment",
+	  "description": "Routine check-up with Dr. Smith."
+	},
+	{
+	  "id": "3",
+	  "date": "2024-08-14",
+	  "weekday": "Wednesday",
+	  "title": "Client Presentation",
+	  "description": "Presentation to the client regarding new product features."
+	},
+	{
+	  "id": "4",
+	  "date": "2024-08-23",
+	  "weekday": "Friday",
+	  "title": "Project Deadline",
+	  "description": "Final deadline for the project submission."
+	}
+  ]
+  
