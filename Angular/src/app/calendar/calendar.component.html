@@ -1,3 +1,16 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">{{event.title}} | {{event.date}}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>{{event.desc}}</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+	</div>
+</ng-template>
+
 <div class="calendar-container">
 	<div class="top-display-container">
 	  <div>
@@ -30,12 +43,27 @@
 			</div>
 			<div *ngFor="let event of events">
 				<div class="calendarEventsForDay" *ngIf="checkEventDay(event, day)">
-					<div class="event" [ngStyle]="{ 'background-color': event.color }">
-						{{event.title}}
+					<div class="event">
+						<div class="btn-group me-3 block">
+							<div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown" class="event" [ngStyle]="{ 'background-color': event.color }" ngbDropdown container="body">
+								<div style="display: flex;">
+									<button type="button" class="eventTitle" (click)="openEventModal(content, event)">{{event.title}}</button>
+									<button type="button" class="buttonGhost dropdown-toggle-split" ngbDropdownToggle></button>
+								</div>
+								<div class="dropdown-menu" ngbDropdownMenu>
+									<button ngbDropdownItem>Edit</button>
+									<button ngbDropdownItem>Duplicate</button>
+									<button ngbDropdownItem>Move</button>
+									<div class="dropdown-divider"></div>
+									<button ngbDropdownItem>Delete</button>
+								</div>
+							</div>
+						</div>
 						<div class="eventDesc" *ngIf="range <= 3">
+							<hr/>
 							{{event.description}}
 						</div>
-					</div> 
+					</div>
 				</div>
 			</div>
 		</div>
@@ -45,4 +73,3 @@
 	  </div>
 	</div>
   </div>
-  
