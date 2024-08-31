@@ -24,7 +24,7 @@
 	  <div *ngFor="let week of calendar" class="calendar-week">
 		<div *ngFor="let day of week" class="calendar-day" [style.height.px]="computedHeight" >
 			<span class="calendar-number" *ngIf="day.toLocaleDateString() != referenceDate.toLocaleDateString()">{{ formatDay(day) }}</span>
-			<span  class="today" *ngIf="day.toLocaleDateString() == referenceDate.toLocaleDateString()">{{ day.getDay() }} &nbsp; <i>Today</i></span>
+			<span  class="today" *ngIf="day.toLocaleDateString() == referenceDate.toLocaleDateString()">{{ day.toLocaleDateString() }} &nbsp; <i>Today</i></span>
 			<div style="display: flex; justify-content: center;">
 				<div style="height: 3px; border-radius: 5px; width: 95%; background-color: rgb(73, 70, 70);"></div>
 			</div>
