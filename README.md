@@ -1,4 +1,4 @@
-# MomentumNg
+# Momentum-Ng-Rb
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
 
@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Rails
+
+Please ensure you have ruby on rails installed on whatever platform you're on
+
+navigat ot the `rails-api/` folder in a seperate terminal and run the `rails server` command while using momentum to ensure proper information flowing in and out of momentum.
+
+May your days be better than yesterday, that's all we can work towards
