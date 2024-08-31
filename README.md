@@ -16,7 +16,7 @@ To create a program within which helps you keep track of your goal acheivement, 
 	-we can then feed your caloric expenditure into a diet algorithm (based on percent macro nutrients with diet presets *keto, vegan, etc*)
 	-then based on that we can implement that information in your schedule as you see fit
 
-![gamba](https://tenor.com/bU1LK.gif)
+![gamba](https://c.tenor.com/YXMkqSh7Y4gAAAAC/tenor.gif)
 
 - Wealth (FinCalc)
 	- You put in income, expenses, and how much you'd like to divy up what's left and it does the rest!
