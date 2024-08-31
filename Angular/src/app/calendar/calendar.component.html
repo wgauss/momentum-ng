@@ -1,0 +1,48 @@
+<div class="calendar-container">
+	<div class="top-display-container">
+	  <div>
+		<div class="topDisplay">
+			<button (click)="changeMonth(-1)" class="buttonFull">←</button>
+			<span>{{ displayMonth }}</span>
+			<button (click)="changeMonth(1)" class="buttonFull">→</button>
+		</div>
+		<hr/>
+		<div class="topDisplay">
+			<button (click)="changeMonth(-12)" class="buttonFull">←</button>
+			<input [value]="currentDate.getFullYear()" (change)="onYearChange($event)" class="year-input" />
+			<button (click)="changeMonth(12)" class="buttonFull">→</button>
+		</div>
+		<div class="topDisplay" *ngIf="!isCurrentDate(referenceDate)">
+			<button (click)="changeToCurrentDay()" class="buttonGhost">Go To Current Day</button>
+		</div>
+	  </div>
+	</div>
+	<div class="weekdays">
+	  <div *ngFor="let day of weekdays" class="weekday">{{ day }}</div>
+	</div>
+	<div class="calendar">
+	  <div *ngFor="let week of calendar" class="calendar-week">
+		<div *ngFor="let day of week" class="calendar-day" [style.height.px]="computedHeight" >
+			<span class="calendar-number" *ngIf="day.toLocaleDateString() != referenceDate.toLocaleDateString()">{{ formatDay(day) }}</span>
+			<span  class="today" *ngIf="day.toLocaleDateString() == referenceDate.toLocaleDateString()">{{ day.getDay() }} &nbsp; <i>Today</i></span>
+			<div style="display: flex; justify-content: center;">
+				<div style="height: 3px; border-radius: 5px; width: 95%; background-color: rgb(73, 70, 70);"></div>
+			</div>
+			<div *ngFor="let event of events">
+				<div class="calendarEventsForDay" *ngIf="checkEventDay(event, day)">
+					<div class="event" [ngStyle]="{ 'background-color': event.color }">
+						{{event.title}}
+						<div class="eventDesc" *ngIf="range <= 3">
+							{{event.description}}
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+	  </div>
+	  <div class="topDisplay">
+		<input type="number" min="1" max="5" [value]="range" (change)="onRangeChange($event)" class="year-input"/>
+	  </div>
+	</div>
+  </div>
+  

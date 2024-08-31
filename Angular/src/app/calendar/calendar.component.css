@@ -1,0 +1,83 @@
+.calendar-container {
+	display: block;
+	justify-content: center;
+	padding: 1rem;
+	background-color: #212121;
+	color: white;
+}
+
+.top-display-container {
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+}
+.topDisplay {
+	display: flex;
+	justify-content: center;
+}
+
+
+.button {
+	margin: 0 0.5rem;
+}
+
+.year-input {
+	width: 50px;
+	text-align: center;
+}
+.calendar{
+
+}
+
+.weekdays, .calendar-week {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.weekday, .calendar-day {
+	display: flex;
+	width: 125px;
+	border: 1px solid #ccc;
+
+}
+.weekday{
+	justify-content: center;	
+	height: 25px;
+	user-select: none;
+}
+.calendar-day {
+	display: block;
+	border-radius: 4px;	
+}
+.calendar-number, .today{
+	display: flex;
+	padding-left: 5px;
+	user-select: none;
+}
+.today{
+	background: transparent;
+	background-color: rgba(0, 182, 254, 0.626);
+}
+.calendarEventsForDay{
+	overflow-y: auto;
+}
+.event {
+	margin: 3px;
+	border-radius: 15px;
+}
+
+.eventDesc{
+	color: rgb(61, 61, 61);
+}
+
+.range-control {
+	display: flex;
+	justify-content: center;
+	padding-top: 1rem;
+}
+
+.range-input {
+	width: 50px;
+	text-align: center;
+}
