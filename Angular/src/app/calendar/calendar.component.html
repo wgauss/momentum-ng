@@ -19,17 +19,23 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 	</div>
 	<div class="modal-body justify-center">
 		<div style="display: flex;">
-			<input type="text" class="w-full" placeholder="Title" />
+			<input type="text" class="w-full" placeholder="Title*" />
 			<input type="month" placeholder="Location" /><!-- ability to choose your own location or on a map -->
 			<button class="buttonFull">Map</button>
 		</div>
 		<textarea style="width: 100%; overflow-y: scroll; height: 150px;" type="text" placeholder="Description" ></textarea>
 		<hr/>
 		<p>Time | Date</p>
-		<div class="timePickerContainer">
-			<div class="timePicker">
-
-			</div>
+		All Day? <input type="checkbox" (change)="setAllDayFlag()"/>
+		<div class="timePickerContainer" *ngIf="allDayFlag">
+			<div class="clock-container">
+				<div class="hour-numbers">
+					<div *ngFor="let number of hourNumbers" class="hour-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusHour + 'px)'}">{{number.label}}</div>
+				</div>
+				<div class="minute-numbers">
+					<div *ngFor="let number of minuteNumbers" class="minute-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusMinute + 'px)'}">{{number.label}}</div>
+				</div>
+			</div>	
 		</div>
 		<hr/>
 		<p>Reccuring? <input type="checkbox" (change)="setReccuringFlag()"/>&nbsp;<select [disabled]="reccuringFlag" (change)="setRecurringType($event)">

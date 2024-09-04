@@ -65,14 +65,22 @@ const icons = {
 	event = {title: "", desc: "", date: "", time: ""}
 	reccuringFlag = true;
 	reminderFlag = true;
+	allDayFlag = true;
 	reccuringType = "";
+
+	hourNumbers: Array<{label: string, deg: number}> = [];
+	minuteNumbers: Array<{label: string, deg: number}> = [];
+	radiusHour: number = 130;
+  	radiusMinute: number = 100;
+
 	constructor(private scheduleService: ScheduleService) { }
 	
 	private modalService = inject(NgbModal);
   
 	ngOnInit(): void {
-	  this.updateCalendar();
-	  this.loadScheduleItems();
+		this.updateCalendar();
+		this.loadScheduleItems();
+		this.generateNumbers();
 	}
   
 	updateCalendar(): void {
@@ -125,6 +133,9 @@ const icons = {
 	}
 	setReminderFlag(){
 		this.reminderFlag = !this.reminderFlag
+	}
+	setAllDayFlag(){
+		this.allDayFlag = !this.allDayFlag
 	}
 	formatDay(day: Date): string {
 	  if (day.getMonth() != this.currentDate.getMonth()){
@@ -185,10 +196,16 @@ const icons = {
 				requestAnimationFrame(animate);
 			}
 		};
-	
 		requestAnimationFrame(animate);
 	}
-	
-	
-  }
+
+	  generateNumbers(): void {
+		for (let i = 1; i <= 12; i++) {
+		  this.hourNumbers.push({ label: i.toString(), deg: (i - 1) * 30 });
+		}
+		for (let i = 1; i <= 60; i++) {
+		  this.minuteNumbers.push({ label: i.toString(), deg: (i - 1) * 6 });
+		}
+	  }
+}
   
