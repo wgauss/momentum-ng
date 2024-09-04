@@ -70,8 +70,8 @@ const icons = {
 
 	hourNumbers: Array<{label: string, deg: number}> = [];
 	minuteNumbers: Array<{label: string, deg: number}> = [];
-	radiusHour: number = 130;
-  	radiusMinute: number = 100;
+	radiusHour: number = 175;
+  	radiusMinute: number = 150;
 
 	constructor(private scheduleService: ScheduleService) { }
 	
