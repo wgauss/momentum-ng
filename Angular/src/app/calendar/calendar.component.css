@@ -47,9 +47,33 @@
 	height: 25px;
 	user-select: none;
 }
+.calendar-top-bar{
+	display: flex; 
+	justify-content: space-between;
+	padding-right: 5px;
+}
+#dropdownBasic2 {
+	display: none;
+	transition: padding-right .8s ease, padding-left .8s ease, border-radius .2s ease;
+}
+#dropdownBasic2:hover {
+	border: 1px solid white;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 5px;
+
+}
 .calendar-day {
 	display: block;
 	border-radius: 4px;	
+	background: transparent;
+	transition: background .5s ease;
+}
+.calendar-day:hover {
+	background-color: rgba(255, 255, 255, 0.15);
+}
+.calendar-day:hover #dropdownBasic2{
+	display: block;
 }
 .calendar-number, .today{
 	display: flex;
@@ -63,12 +87,9 @@
 .calendarEventsForDay{
 	overflow-y: auto;
 	height: fit-content;
-	max-width: 123px;
 	overflow-x: hidden;
 	display: block;
 	justify-content: center;
-
-
 }
 .event {
 	border-radius: 10px;
@@ -89,6 +110,7 @@
 }
 .eventTitle {
 	font-size: 14px;
+	width: 100%;
 	transition: box-shadow .5s ease, border-radius 1s ease;
 }
 
@@ -100,7 +122,9 @@
 	box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.33) inset;
 	border-radius: 5px;
 }
-
+.dropDownItem {
+	width: 125px;
+}
 
 .range-control {
 	display: flex;

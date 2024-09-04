@@ -17,6 +17,17 @@ button {
 	user-select: none;
 
 }
+button:active {
+	cursor: progress;
+}
+button:disabled, button:disabled:hover {
+	background: #dddddd;
+	user-select: none;
+	cursor: default;
+	-webkit-box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0) inset;
+	-moz-box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0) inset;
+	box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0) inset;
+}
 .buttonFull{
 	background-color: #87ceeb;
 	margin: 0 0.5rem;
