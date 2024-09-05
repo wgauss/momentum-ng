@@ -27,13 +27,28 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 		<hr/>
 		<p>Time | Date</p>
 		All Day? <input type="checkbox" (change)="setAllDayFlag()"/>
-		<div class="timePickerContainer" *ngIf="allDayFlag">
+		<!-- timeInputContainerDiv will be in clock / time picker component -->
+		<div class="timeInputContainer" *ngIf="allDayFlag">
+			<div class="timeFromContainer">
+				<p style="padding-top: 5px;">From : &nbsp;</p>
+				<input class="timeInput" id="hourFrom" type="number" min="0" max="24"  placeholder="HH"/>
+				<p>&nbsp;:&nbsp;</p>
+				<input class="timeInput" id="minuteFrom" type="number" min="0" max="60"  placeholder="MM"/>
+			</div>
+			<div class="timeToContainer">
+				<p style="padding-top: 5px;">To : &nbsp;</p>
+				<input class="timeInput" id="hourTo" type="number" min="0" max="24"  placeholder="HH"/>
+				<p>&nbsp;:&nbsp;</p>
+				<input class="timeInput" id="minuteTo" type="number" min="0" max="60"  placeholder="MM"/>
+			</div>
+		</div>
+		<div class="timePickerContainer" *ngIf="allDayFlag" [style.height.px]="clockHeight">
 			<div class="clock-container">
 				<div class="hour-numbers">
-					<div *ngFor="let number of hourNumbers" class="hour-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusHour + 'px)'}">{{number.label}}</div>
+					<div *ngFor="let number of hourNumbers" class="hour-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusHour + 'px)'}" (click)="insertHour($event)">{{number.label}}</div>
 				</div>
 				<div class="minute-numbers">
-					<div *ngFor="let number of minuteNumbers" class="minute-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusMinute + 'px)'}">{{number.label}}</div>
+					<div *ngFor="let number of minuteNumbers" class="minute-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusMinute + 'px)'}" (click)="insertMinute($event)">{{number.label}}</div>
 				</div>
 			</div>	
 		</div>

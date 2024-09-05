@@ -2,7 +2,9 @@ import {
 	Component, 
 	OnInit,
 	inject, 
-	TemplateRef
+	TemplateRef,
+	ViewChild,
+	ElementRef
   } from '@angular/core';
   import { 
 	format, 
@@ -72,6 +74,10 @@ const icons = {
 	minuteNumbers: Array<{label: string, deg: number}> = [];
 	radiusHour: number = 175;
   	radiusMinute: number = 150;
+	clockHeight: number = 500;
+	activeHour: string = "From";
+	activeMinute: string = "From";
+
 
 	constructor(private scheduleService: ScheduleService) { }
 	
@@ -117,10 +123,10 @@ const icons = {
         const newRange = Number(input.value);
         const newComputedHeight = this.height / newRange;
 
-        this.animateLerp(this.computedHeight, newComputedHeight, .333, (value) => {
-            this.computedHeight = value;
-            this.updateCalendar();
-        });
+		this.animateLerp(this.computedHeight, newComputedHeight, .333, (value) => {
+			this.computedHeight = value;
+			this.updateCalendar();
+		});
         
         this.range = newRange;
     }
@@ -136,6 +142,10 @@ const icons = {
 	}
 	setAllDayFlag(){
 		this.allDayFlag = !this.allDayFlag
+		this.animateLerp(0, this.clockHeight, .666, (value) => {
+			this.clockHeight = value;
+			this.updateCalendar();
+		});
 	}
 	formatDay(day: Date): string {
 	  if (day.getMonth() != this.currentDate.getMonth()){
@@ -198,14 +208,49 @@ const icons = {
 		};
 		requestAnimationFrame(animate);
 	}
-
+	// Under this are what should be in clock / time Picker component in the future
 	  generateNumbers(): void {
-		for (let i = 1; i <= 12; i++) {
-		  this.hourNumbers.push({ label: i.toString(), deg: (i - 1) * 30 });
+		for (let i = 0; i <= 23; i++) {
+		  this.hourNumbers.push({ label: i.toString(), deg: (i) * 15 });
 		}
-		for (let i = 1; i <= 60; i++) {
-		  this.minuteNumbers.push({ label: i.toString(), deg: (i - 1) * 6 });
+		for (let i = 0; i <= 59; i++) {
+		  this.minuteNumbers.push({ label: i.toString(), deg: (i) * 6 });
 		}
+	  }
+
+	  insertHour(event: Event) {
+		const clickedElement = event.target as HTMLElement;
+		let value = clickedElement.innerHTML
+		let formatted = "";
+		if(value.length < 2){
+			formatted = "0" + value;
+		} else {
+			formatted = value;
+		}
+		if (this.activeHour == "From"){
+			(document.getElementById("hourFrom") as HTMLInputElement).value = formatted;
+			this.activeHour = "To"; 
+		} else if (this.activeHour == "To"){
+			(document.getElementById("hourTo") as HTMLInputElement).value = formatted;
+			this.activeHour = "From"; 
+		} 
+	  }
+	  insertMinute(event: Event) {
+		const clickedElement = event.target as HTMLElement;
+		let value = clickedElement.innerHTML
+		let formatted = "";
+		if(value.length < 2){
+			formatted = "0" + value;
+		} else {
+			formatted = value;
+		}
+		if (this.activeMinute == "From"){
+			(document.getElementById("minuteFrom") as HTMLInputElement).value = formatted;
+			this.activeMinute = "To"; 
+		} else if (this.activeMinute == "To"){
+			(document.getElementById("minuteTo") as HTMLInputElement).value = formatted;
+			this.activeMinute = "From"; 
+		} 
 	  }
 }
   

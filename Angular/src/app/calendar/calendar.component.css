@@ -135,13 +135,27 @@
 	text-align: center;
 }
 
+.timeInputContainer {
+	display: flex;
+	justify-content: space-evenly;
+}
+.timeFromContainer, .timeToContainer{
+	display: flex;
+	justify-content: center;
+
+}
+.timeInput {
+	width: 33%;
+	height: 80%;
+}
+
 .timePickerContainer{
 	display: flex;
     justify-content: center;
     align-items: center;
     height: fit-content;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #b7b7b7;
 }
 .clock-container {
     position: relative;
@@ -193,7 +207,7 @@
 }
 .hour-number:hover {
 	background-color: black;
-	width: 25px;
+	width: 30px;
 	position: absolute;
 	margin-left: -10px;
 	border-radius: 100%;
@@ -201,10 +215,18 @@
 }
 .minute-number:hover {
 	background-color: rgb(0, 0, 0);
-	width: 25px;
+	width: 30px;
 	position: absolute;
 	margin-left: -10px;
 	border-radius: 100%;
 	font-size: 18px;
 	color: white;
+}
+.minute-number , .hour-number {
+	transition: color .15s ease;
+	
+}
+.minute-number:active, .hour-number:active {
+	color: black;
+	background-color: rgb(255, 255, 255);
 }
