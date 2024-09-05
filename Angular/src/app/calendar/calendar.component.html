@@ -31,15 +31,15 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 		<div class="timeInputContainer" *ngIf="allDayFlag">
 			<div class="timeFromContainer">
 				<p style="padding-top: 5px;">From : &nbsp;</p>
-				<input class="timeInput" id="hourFrom" type="number" min="0" max="24"  placeholder="HH"/>
+				<input class="timeInput" id="hourFrom" type="number" min="0" max="24"  placeholder="HH" (click)="setActiveHour('From')" [ngStyle]="{'border': activeHour === 'From' ? '3px solid skyblue' : ''}"/>
 				<p>&nbsp;:&nbsp;</p>
-				<input class="timeInput" id="minuteFrom" type="number" min="0" max="60"  placeholder="MM"/>
+				<input class="timeInput" id="minuteFrom" type="number" min="0" max="60"  placeholder="MM" (click)="setActiveMinute('From')" [ngStyle]="{'border': activeMinute === 'From' ? '3px solid skyblue' : ''}"/>
 			</div>
 			<div class="timeToContainer">
 				<p style="padding-top: 5px;">To : &nbsp;</p>
-				<input class="timeInput" id="hourTo" type="number" min="0" max="24"  placeholder="HH"/>
+				<input class="timeInput" id="hourTo" type="number" min="0" max="24"  placeholder="HH" (click)="setActiveHour('To')" [ngStyle]="{'border': activeHour === 'To' ? '3px solid skyblue' : ''}"/>
 				<p>&nbsp;:&nbsp;</p>
-				<input class="timeInput" id="minuteTo" type="number" min="0" max="60"  placeholder="MM"/>
+				<input class="timeInput" id="minuteTo" type="number" min="0" max="60"  placeholder="MM" (click)="setActiveMinute('To')" [ngStyle]="{'border': activeMinute === 'To' ? '3px solid skyblue' : ''}"/>
 			</div>
 		</div>
 		<div class="timePickerContainer" *ngIf="allDayFlag" [style.height.px]="clockHeight">

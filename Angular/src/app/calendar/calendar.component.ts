@@ -252,5 +252,11 @@ const icons = {
 			this.activeMinute = "From"; 
 		} 
 	  }
+	  setActiveHour(which:string){
+		this.activeHour = which;
+	  }
+	  setActiveMinute(which:string){
+		this.activeMinute = which;
+	  }
 }
   
