@@ -14,92 +14,99 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 
 <ng-template #addEvent let-modal>
 	<div class="modal-header">
-		<h4 class="modal-title">Add Event (from schedule component)</h4>
+		<h4 class="modal-title">{{this.eventForm.get('title')?.value}} ({{event.date}})</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body justify-center">
-		<div style="display: flex;">
-			<input type="text" class="w-full" placeholder="Title*" />
-			<input type="month" placeholder="Location" /><!-- ability to choose your own location or on a map -->
-			<button class="buttonFull">Map</button>
-		</div>
-		<textarea style="width: 100%; overflow-y: scroll; height: 150px;" type="text" placeholder="Description" ></textarea>
-		<hr/>
-		<p>Time | Date</p>
-		All Day? <input type="checkbox" (change)="setAllDayFlag()"/>
-		<!-- timeInputContainerDiv will be in clock / time picker component -->
-		<div class="timeInputContainer" *ngIf="allDayFlag">
-			<div class="timeFromContainer">
-				<p style="padding-top: 5px;">From : &nbsp;</p>
-				<input class="timeInput" id="hourFrom" type="number" min="0" max="23"  placeholder="HH" (click)="setActiveHour('From')" [ngStyle]="{'border': activeHour === 'From' ? '3px solid skyblue' : ''}"/>
-				<p>&nbsp;:&nbsp;</p>
-				<input class="timeInput" id="minuteFrom" type="number" min="0" max="59"  placeholder="MM" (click)="setActiveMinute('From')" [ngStyle]="{'border': activeMinute === 'From' ? '3px solid skyblue' : ''}"/>
+		<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+			<div style="display: flex;">
+				<input type="text" class="w-full" placeholder="Title*" id="title" formControlName="title" required/>
+				<input type="month" placeholder="Location" id="location" formControlName="location"/><!-- ability to choose your own location or on a map -->
+				<button class="buttonFull">Map</button>
 			</div>
-			<div class="timeToContainer">
-				<p style="padding-top: 5px;">To : &nbsp;</p>
-				<input class="timeInput" id="hourTo" type="number" min="0" max="23"  placeholder="HH" (click)="setActiveHour('To')" [ngStyle]="{'border': activeHour === 'To' ? '3px solid skyblue' : ''}"/>
-				<p>&nbsp;:&nbsp;</p>
-				<input class="timeInput" id="minuteTo" type="number" min="0" max="59"  placeholder="MM" (click)="setActiveMinute('To')" [ngStyle]="{'border': activeMinute === 'To' ? '3px solid skyblue' : ''}"/>
+			<textarea style="width: 100%; overflow-y: scroll; height: 150px;" type="text" placeholder="Description" id="description" formControlName="description"></textarea>
+			<hr/>
+			All Day?* <input type="checkbox" formControlName="isAllDay"/>
+			<!-- timeInputContainerDiv will be in clock / time picker component -->
+			<div class="timeInputContainer" *ngIf="!eventForm.get('isAllDay')?.value">
+				<div class="timeFromContainer">
+					<p style="padding-top: 5px;">*From : &nbsp;</p>
+					<input class="timeInput" id="hourFrom" type="number" min="0" max="23"  placeholder="HH" (click)="setActiveHour('From')" [ngStyle]="{'border': activeHour === 'From' ? '3px solid skyblue' : ''}"/>
+					<p>&nbsp;:&nbsp;</p>
+					<input class="timeInput" id="minuteFrom" type="number" min="0" max="59"  placeholder="MM" (click)="setActiveMinute('From')" [ngStyle]="{'border': activeMinute === 'From' ? '3px solid skyblue' : ''}"/>
+				</div>
+				<div class="timeToContainer">
+					<p style="padding-top: 5px;">*To : &nbsp;</p>
+					<input class="timeInput" id="hourTo" type="number" min="0" max="23"  placeholder="HH" (click)="setActiveHour('To')" [ngStyle]="{'border': activeHour === 'To' ? '3px solid skyblue' : ''}"/>
+					<p>&nbsp;:&nbsp;</p>
+					<input class="timeInput" id="minuteTo" type="number" min="0" max="59"  placeholder="MM" (click)="setActiveMinute('To')" [ngStyle]="{'border': activeMinute === 'To' ? '3px solid skyblue' : ''}"/>
+				</div>
 			</div>
-		</div>
-		<div class="timePickerContainer" *ngIf="allDayFlag" [style.height.px]="clockHeight">
-			<div class="clock-container">
-				<div class="hour-numbers">
-					<div *ngFor="let number of hourNumbers" class="hour-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusHour + 'px)'}" (click)="insertHour($event)">{{number.label}}</div>
-				</div>
-				<div class="minute-numbers">
-					<div *ngFor="let number of minuteNumbers" class="minute-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusMinute + 'px)'}" (click)="insertMinute($event)">{{number.label}}</div>
-				</div>
-			</div>	
-		</div>
-		<hr/>
-		<p>Reccuring? <input type="checkbox" (change)="setReccuringFlag()"/>&nbsp;<select [disabled]="reccuringFlag" (change)="setRecurringType($event)">
-			<option value="1" selected>Everyday</option>
-			<option value="2">Weekday</option>
-			<option value="3">Custom</option>
-		</select></p>
-		<div *ngIf="reccuringType == '1'">
-
-		</div>
-		<div *ngIf="reccuringType === '2' && !reccuringFlag">
-			Every &nbsp;
-			<select>
-				<option value="Sunday">Sunday</option>
-				<option value="Monday">Monday</option>
-				<option value="Tuesday">Tuesday</option>
-				<option value="Wednesday">Wednesday</option>
-				<option value="Thursday">Thursday</option>
-				<option value="Friday">Friday</option>
-				<option value="Saturday">Saturday</option>
-			  </select>
-		</div>
-		<div *ngIf="reccuringType == '3' && !reccuringFlag">
-			<span>Every &nbsp;</span>
-			<input type="number" [disabled]="reccuringFlag"/>&nbsp;<select [disabled]="reccuringFlag">
-				<option>seconds</option>
-				<option>Hours</option>
-				<option selected>Days</option>
-				<option>Months</option>
-				<option>Years</option>
-			</select>
-		</div>
-		<hr/>
-		<p>Reminder(s)? <input type="checkbox" (change)="setReminderFlag()"/></p>
-		
-		<div *ngIf="!reminderFlag">
-			<input type="number" [disabled]="reminderFlag"/>&nbsp;<select [disabled]="reminderFlag">
-				<option>seconds</option>
-				<option>Hours</option>
-				<option selected>Days</option>
-				<option>Months</option>
-				<option>Years</option>
-			</select>
-			<span>&nbsp;Before</span>
-			<button class="buttonFull" [disabled]="reminderFlag">Add</button>
-		</div>
+			<div class="timePickerContainer" *ngIf="!eventForm.get('isAllDay')?.value" [style.height.px]="clockHeight">
+				<div class="clock-container">
+					<div class="hour-numbers">
+						<div *ngFor="let number of hourNumbers" class="hour-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusHour + 'px)'}" (click)="insertHour($event)">{{number.label}}</div>
+					</div>
+					<div class="minute-numbers">
+						<div *ngFor="let number of minuteNumbers" class="minute-number" [ngStyle]="{'transform': 'rotate(' + number.deg + 'deg) translateY(-' + radiusMinute + 'px)'}" (click)="insertMinute($event)">{{number.label}}</div>
+					</div>
+				</div>	
+			</div>
+			<hr/>
+			<p>Reccuring? <input type="checkbox"  formControlName="isRecurring"/>&nbsp;<select [disabled]="!eventForm.get('isRecurring')?.value" (change)="setRecurringType($event)">
+				<option value="1" selected>Everyday</option>
+				<option value="2">Weekday</option>
+				<option value="3">Custom</option>
+			</select></p>
+			<div *ngIf="reccuringType == '1'">
+	
+			</div>
+			<div *ngIf="reccuringType === '2' && eventForm.get('isRecurring')?.value">
+				Every &nbsp;
+				<select id="recurrenceWeekday">
+					<option value="Sunday">Sunday</option>
+					<option value="Monday">Monday</option>
+					<option value="Tuesday">Tuesday</option>
+					<option value="Wednesday">Wednesday</option>
+					<option value="Thursday">Thursday</option>
+					<option value="Friday">Friday</option>
+					<option value="Saturday">Saturday</option>
+				  </select>
+			</div>
+			<div *ngIf="reccuringType == '3' && eventForm.get('isRecurring')?.value">
+				<span>Every &nbsp;</span>
+				<input type="number" id="recurrenceCustomValue" />&nbsp;<select id="recurrenceCustomType">
+					<option>seconds</option>
+					<option>Hours</option>
+					<option selected>Days</option>
+					<option>Months</option>
+					<option>Years</option>
+				</select>
+			</div>
+			<hr/>
+			<div>
+				<div formArrayName="reminders">
+					<div *ngFor="let reminder of reminders.controls; let i = index" [formGroupName]="i">
+					  <input type="number" formControlName="amount" placeholder="Amount" />
+					  <select formControlName="unit">
+						<option>seconds</option>
+						<option>Hours</option>
+						<option>Days</option>
+						<option>Months</option>
+						<option>Years</option>
+					  </select>
+					  <button type="button" class="btn btn-danger" (click)="removeReminder(i)" style="margin-left: 5px;">Remove</button>
+					  <hr/>
+					</div>
+				  </div>
+				  <button type="button" (click)="addReminder()">Add Reminder</button>
+			</div>
+		</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+		<button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cancel</button>
+
+		<button type="submit" class="btn btn-primary" [disabled]="checkValidation()" (click)="onSubmit()">Add Event</button>
 	</div>
 </ng-template>
 
@@ -150,7 +157,7 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 				<span ngbDropdown placement="top-end" class="d-inline-block">
 					<button id="dropdownBasic2" ngbDropdownToggle></button>
 					<div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-						<button ngbDropdownItem (click)="createEventModal(addEvent)" class="dropDownItem">Add Event</button>
+						<button ngbDropdownItem (click)="createEventModal(addEvent, day)" class="dropDownItem">Add Event</button>
 					</div>
 				</span>
 			</div>
