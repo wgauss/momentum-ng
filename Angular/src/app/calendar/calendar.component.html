@@ -20,6 +20,7 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 	<div class="modal-body justify-center">
 		<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
 			<div style="display: flex;">
+				<input [(colorPicker)]="color" [style.background]="color" style="width: 20px; border: 1px dashed black; border-radius: 10%;"/>
 				<input type="text" class="w-full" placeholder="Title*" id="title" formControlName="title" required/>
 				<input type="month" placeholder="Location" id="location" formControlName="location"/><!-- ability to choose your own location or on a map -->
 				<button class="buttonFull">Map</button>

@@ -13,10 +13,11 @@ const icons = { arrowLeft };
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { ColorPickerModule } from 'ngx-color-picker';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, NgbDropdownModule, NgbTypeaheadModule, FormsModule, NgxBootstrapIconsModule, ReactiveFormsModule],
+  imports: [CommonModule, HttpClientModule, NgbDropdownModule, NgbTypeaheadModule, FormsModule, NgxBootstrapIconsModule, ReactiveFormsModule, ColorPickerModule ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
   providers: [ScheduleService]
@@ -43,7 +44,7 @@ export class CalendarComponent implements OnInit {
   clockHeight: number = 500;
   activeHour: string = "From";
   activeMinute: string = "From";
-
+  color: any;
   constructor(private scheduleService: ScheduleService, private fb: FormBuilder) {
     this.eventForm = this.fb.group({
       title: ['', Validators.required],
@@ -54,8 +55,9 @@ export class CalendarComponent implements OnInit {
       endTime: [''],
       isRecurring: [false],
       recurrenceFrequency: [''],
-      reminders: this.fb.array([])  // Initialize FormArray for reminders
-    });
+      reminders: this.fb.array([]),  // Initialize FormArray for reminders
+	  color: ''
+	});
   }
 
   private modalService = inject(NgbModal);
@@ -296,7 +298,7 @@ export class CalendarComponent implements OnInit {
       } else {
         this.eventForm.get('recurrenceFrequency')?.setValue("");
       }
-      
+      this.eventForm.get('color')?.setValue(this.color);
       console.log(this.eventForm.value);
       // Handle form submission
     }
