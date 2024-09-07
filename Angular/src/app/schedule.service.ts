@@ -8,7 +8,7 @@ TODO:
 
 */
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,  HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ScheduleItem } from './schedule.model';
@@ -36,7 +36,11 @@ export class ScheduleService {
   }
 
   addScheduleItem(newItem: ScheduleItem): Observable<ScheduleItem> {
-	return this.http.post<ScheduleItem>(this.apiUrl, newItem).pipe(
+	return this.http.post<ScheduleItem>(this.apiUrl, newItem, {
+	  headers: new HttpHeaders({
+		'Content-Type': 'application/json'
+	  })
+	}).pipe(
 	  catchError(this.handleError<ScheduleItem>('addScheduleItem'))
 	);
   }

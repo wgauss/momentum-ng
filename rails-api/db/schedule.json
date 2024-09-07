@@ -1,32 +1,43 @@
 [
-	{
-	  "id": "1",
-	  "date": "2024-08-05",
-	  "weekday": "Monday",
-	  "color": "#33ccff",
-	  "title": "Team Meeting",
-	  "description": "Monthly team meeting to discuss project progress."
-	},
-	{
-	  "id": "2",
-	  "date": "2024-08-07",
-	  "weekday": "Wednesday",
-	  "title": "Doctor Appointment",
-	  "description": "Routine check-up with Dr. Smith."
-	},
-	{
-	  "id": "3",
-	  "date": "2024-08-14",
-	  "weekday": "Wednesday",
-	  "title": "Client Presentation",
-	  "description": "Presentation to the client regarding new product features."
-	},
-	{
-	  "id": "4",
-	  "date": "2024-08-23",
-	  "weekday": "Friday",
-	  "title": "Project Deadline",
-	  "description": "Final deadline for the project submission."
-	}
-  ]
-  
+  {
+    "id": "1",
+    "date": "2024-09-05",
+    "startTime": "11:00",
+    "endTime": "13:00",
+    "weekday": "Monday",
+    "color": "#33ccff",
+    "title": "Team Meeting",
+    "description": "Monthly team meeting to discuss project progress."
+  },
+  {
+    "id": "2",
+    "date": "2024-09-07",
+    "weekday": "Wednesday",
+    "title": "Doctor Appointment",
+    "description": "Routine check-up with Dr. Smith."
+  },
+  {
+    "id": "3",
+    "date": "2024-09-14",
+    "weekday": "Wednesday",
+    "title": "Client Presentation",
+    "description": "Presentation to the client regarding new product features."
+  },
+  {
+    "id": "4",
+    "date": "2024-09-23",
+    "weekday": "Friday",
+    "title": "Project Deadline",
+    "description": "Final deadline for the project submission."
+  },
+  {
+    "id": "5",
+    "date": "2024-09-05",
+    "startTime": "13:00",
+    "endTime": "21:00",
+    "weekday": "Monday",
+    "color": "#aaccff",
+    "title": "Work",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }
+]

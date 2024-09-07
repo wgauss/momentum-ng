@@ -3,7 +3,6 @@
 	<ul>
 	  <li *ngFor="let item of scheduleItems">
 		{{ item.title }} ({{ item.date }})
-		<button (click)="deleteItem(item.id)">Delete</button>
 	  </li>
 	</ul>
   

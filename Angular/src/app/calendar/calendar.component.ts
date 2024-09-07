@@ -300,6 +300,26 @@ export class CalendarComponent implements OnInit {
       }
       this.eventForm.get('color')?.setValue(this.color);
       console.log(this.eventForm.value);
+	  let newEvent: ScheduleItem = {
+		title: this.eventForm.get('title')?.value,
+		description: this.eventForm.get('description')?.value,
+		date: format(this.event.date, "yyyy-MM-dd"),
+		startTime: this.eventForm.get('startTime')?.value,
+		endTime: this.eventForm.get('endTime')?.value,
+		reccurring: this.eventForm.get('recurrenceFrequency')?.value,
+		color: this.eventForm.get('color')?.value
+	  }
+	  console.log('Event to submit:', newEvent);
+	  this.scheduleService.addScheduleItem(newEvent).subscribe(
+		(response) => {
+		  console.log('Event added successfully:', response);
+		  this.loadScheduleItems(); // Refresh the list of schedule items
+		  this.updateCalendar(); // Refresh the calendar
+		},
+		(error) => {
+		  console.error('Error adding event:', error);
+		}
+	  );
       // Handle form submission
     }
   }
