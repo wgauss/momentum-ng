@@ -330,6 +330,8 @@ export class CalendarComponent implements OnInit {
 		  console.error('Error adding event:', error);
 		}
 	  );
+	  this.eventForm.reset()
+	  this.eventForm.get('isAllDay')?.setValue(true)
 	  this.modalService.dismissAll("cause");
 	}
   }
