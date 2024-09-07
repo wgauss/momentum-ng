@@ -12,10 +12,10 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 
 -->
 
-<ng-template #addEvent let-modal>
+<ng-template #addUpdateEvent let-modal>
 	<div class="modal-header">
 		<h4 class="modal-title">{{this.eventForm.get('title')?.value}} ({{event.date}})</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click'); resetForm()"></button>
 	</div>
 	<div class="modal-body justify-center">
 		<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
@@ -32,15 +32,15 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 			<div class="timeInputContainer" *ngIf="!eventForm.get('isAllDay')?.value">
 				<div class="timeFromContainer">
 					<p style="padding-top: 5px;">*From : &nbsp;</p>
-					<input class="timeInput" id="hourFrom" type="number" min="0" max="23"  placeholder="HH" (click)="setActiveHour('From')" [ngStyle]="{'border': activeHour === 'From' ? '3px solid skyblue' : ''}"/>
+					<input class="timeInput" id="hourFrom" formControlName="hourFrom" type="number" min="0" max="23"  placeholder="HH" (click)="setActiveHour('From')" [ngStyle]="{'border': activeHour === 'From' ? '3px solid skyblue' : ''}"/>
 					<p>&nbsp;:&nbsp;</p>
-					<input class="timeInput" id="minuteFrom" type="number" min="0" max="59"  placeholder="MM" (click)="setActiveMinute('From')" [ngStyle]="{'border': activeMinute === 'From' ? '3px solid skyblue' : ''}"/>
+					<input class="timeInput" id="minuteFrom" formControlName="minuteFrom" type="number" min="0" max="59"  placeholder="MM" (click)="setActiveMinute('From')" [ngStyle]="{'border': activeMinute === 'From' ? '3px solid skyblue' : ''}"/>
 				</div>
 				<div class="timeToContainer">
 					<p style="padding-top: 5px;">*To : &nbsp;</p>
-					<input class="timeInput" id="hourTo" type="number" min="0" max="23"  placeholder="HH" (click)="setActiveHour('To')" [ngStyle]="{'border': activeHour === 'To' ? '3px solid skyblue' : ''}"/>
+					<input class="timeInput" id="hourTo" formControlName="hourTo" type="number" min="0" max="23"  placeholder="HH" (click)="setActiveHour('To')" [ngStyle]="{'border': activeHour === 'To' ? '3px solid skyblue' : ''}"/>
 					<p>&nbsp;:&nbsp;</p>
-					<input class="timeInput" id="minuteTo" type="number" min="0" max="59"  placeholder="MM" (click)="setActiveMinute('To')" [ngStyle]="{'border': activeMinute === 'To' ? '3px solid skyblue' : ''}"/>
+					<input class="timeInput" id="minuteTo" formControlName="minuteTo" type="number" min="0" max="59"  placeholder="MM" (click)="setActiveMinute('To')" [ngStyle]="{'border': activeMinute === 'To' ? '3px solid skyblue' : ''}"/>
 				</div>
 			</div>
 			<div class="timePickerContainer" *ngIf="!eventForm.get('isAllDay')?.value" [style.height.px]="clockHeight">
@@ -106,8 +106,8 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cancel</button>
-
-		<button type="submit" class="btn btn-primary" [disabled]="checkValidation()" (click)="onSubmit()">Add Event</button>
+		<button type="submit" class="btn btn-primary" [disabled]="checkValidation()" (click)="onSubmit(true)" *ngIf="event.exists">Update Event</button>
+		<button type="submit" class="btn btn-primary" [disabled]="checkValidation()" (click)="onSubmit()" *ngIf="!event.exists">Add Event</button>
 	</div>
 </ng-template>
 
@@ -158,7 +158,7 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 				<span ngbDropdown placement="top-end" class="d-inline-block">
 					<button id="dropdownBasic2" ngbDropdownToggle></button>
 					<div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-						<button ngbDropdownItem (click)="createEventModal(addEvent, day)" class="dropDownItem">Add Event</button>
+						<button ngbDropdownItem (click)="createUpdateEventModal(addUpdateEvent, day)" class="dropDownItem">Add Event</button>
 					</div>
 				</span>
 			</div>
@@ -180,7 +180,7 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 										<button type="button" class="buttonGhost dropdown-toggle-split" ngbDropdownToggle></button>
 									</div>
 									<div class="dropdown-menu" ngbDropdownMenu>
-										<button ngbDropdownItem class="dropDownItem" (click)="openEventModal(content, event)">Edit</button>
+										<button ngbDropdownItem class="dropDownItem" (click)="createUpdateEventModal(addUpdateEvent, day, event)">Edit</button>
 										<div class="dropdown-divider"></div>
 										<button ngbDropdownItem class="dropDownItem" (click)="removeEvent(event)">Delete</button>
 									</div>

@@ -73,7 +73,8 @@ class Api::ScheduleItemsController < ApplicationController
 	end
   
 	def schedule_item_params
-		params.permit(:title, :description, :date, :startTime, :endTime, :reccurring, :color).to_h
+		params.permit( :title, :description, :date, :startTime, :endTime, :reccurring, :color, :location, :isAllDay, :isRecurring, :group, reminders:[]).to_h
 	end
+	  
   end
   

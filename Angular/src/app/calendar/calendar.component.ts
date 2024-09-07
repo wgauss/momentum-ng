@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, TemplateRef } from '@angular/core';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, eachDayOfInterval } from 'date-fns';
 import { NgbModal, NgbDropdownModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { enUS } from 'date-fns/locale';
+import { enUS, id } from 'date-fns/locale';
 import { CommonModule } from '@angular/common';
 import { ScheduleService } from '../schedule.service';
 import { ScheduleItem } from '../schedule.model';
@@ -32,7 +32,7 @@ export class CalendarComponent implements OnInit {
   height: number = 500; 
   computedHeight: number = this.height / this.range; // Height per calendar cell
   events: ScheduleItem[] = [] 
-  event = {title: "", desc: "", date: "", time: ""}
+  event = {title: "", desc: "", date: "", time: "", exists: false, id: ""}
   reminderFlag = true;
   reccuringType = "";
   eventForm: FormGroup;
@@ -56,7 +56,12 @@ export class CalendarComponent implements OnInit {
       isRecurring: [false],
       recurrenceFrequency: [''],
       reminders: this.fb.array([]),  // Initialize FormArray for reminders
-	  color: ''
+	  color: '',
+	  hourFrom:'',
+	  minuteFrom: '',
+	  hourTo:'',
+	  minuteTo: '',
+	
 	});
   }
 
@@ -173,11 +178,36 @@ export class CalendarComponent implements OnInit {
     this.event.date = eventObj.date ? format(eventObj.date, 'MMMM / d / yyyy') : '';
     this.modalService.open(content, { centered: true });
   }
+  
+  createUpdateEventModal(addUpdateEvent: TemplateRef<any>, eventObj: Date, event?: ScheduleItem){
+    if(event){
+		this.eventForm.get('title')?.setValue(event.title);
+		this.eventForm.get('location')?.setValue(event.location) ?? '';
+		this.eventForm.get('description')?.setValue(event.description) ?? '';
+		this.eventForm.get('isAllDay')?.setValue(event.isAllDay) ?? '';
+		this.eventForm.get('startTime')?.setValue(event.startTime) ?? '';
+		this.eventForm.get('endTime')?.setValue(event.endTime) ?? '';
+		this.eventForm.get('isRecurring')?.setValue(event.isRecurring) ?? '';
+		this.eventForm.get('recurrenceFrequency')?.setValue(event.reccurring) ?? '';
+		this.eventForm.get('reminders')?.setValue(event.reminders) ?? '';
+		this.eventForm.get('color')?.setValue(event.color) ?? '';
+		this.color = event.color;
 
-  createEventModal(addEvent: TemplateRef<any>, eventObj: Date){
-    this.event.date = eventObj.toLocaleDateString() ? format(eventObj.toLocaleDateString(), 'MMMM / dd / yyyy') : '';
+		if(this.eventForm.get('isAllDay')){
+			let startTime = this.eventForm.get('startTime')?.value.split(':'); 
+			let endTime = this.eventForm.get('endTime')?.value.split(':'); 
+			
+			this.eventForm.get('hourFrom')?.setValue(startTime[0]);
+			this.eventForm.get('minuteFrom')?.setValue(startTime[1]);
+			this.eventForm.get('hourTo')?.setValue(endTime[0]);
+			this.eventForm.get('minuteTo')?.setValue(endTime[1]);
+		}
+		this.event.exists = true;
+		this.event.id = event.id?.toString() ?? '';
+	}
+	this.event.date = eventObj.toLocaleDateString() ? format(eventObj.toLocaleDateString(), 'MMMM / dd / yyyy') : '';
 
-    this.modalService.open(addEvent, { centered: true });
+    this.modalService.open(addUpdateEvent, { centered: true });
   }
   removeEvent(event:ScheduleItem){
 	if(event.id){
@@ -288,7 +318,14 @@ export class CalendarComponent implements OnInit {
       return !this.eventForm.valid || !(isHourFromValid && isMinuteFromValid && isHourToValid && isMinuteToValid);
     }
   }
-  onSubmit(): void {
+  resetForm(){
+		this.eventForm.reset()
+		this.event.id = "";
+		this.event.exists = false
+		this.eventForm.get('isAllDay')?.setValue(true)
+		this.color = ""
+  }
+  onSubmit(update? :boolean): void {
     if (this.eventForm.valid) {
       if(!this.eventForm.get('isAllDay')?.value){
         let fromTime = (document.getElementById("hourFrom") as HTMLInputElement).value + ":" + (document.getElementById("minuteFrom") as HTMLInputElement).value;
@@ -315,23 +352,40 @@ export class CalendarComponent implements OnInit {
 		title: this.eventForm.get('title')?.value,
 		description: this.eventForm.get('description')?.value,
 		date: format(this.event.date, "yyyy-MM-dd"),
+		isAllDay: this.eventForm.get('isAllDay')?.value,
 		startTime: this.eventForm.get('startTime')?.value,
 		endTime: this.eventForm.get('endTime')?.value,
+		isRecurring: this.eventForm.get('isRecurring')?.value,
 		reccurring: this.eventForm.get('recurrenceFrequency')?.value,
-		color: this.eventForm.get('color')?.value
+		reminders: this.eventForm.get('reminders')?.value,
+		color: this.eventForm.get('color')?.value,
+		location: this.eventForm.get('location')?.value,
+		id: this.event.id.toString()
 	  }
-	  this.scheduleService.addScheduleItem(newEvent).subscribe(
-		(response) => {
-		  console.log('Event added successfully:', response);
-		  this.loadScheduleItems(); // Refresh the list of schedule items
-		  this.updateCalendar(); // Refresh the calendar
-		},
-		(error) => {
-		  console.error('Error adding event:', error);
-		}
-	  );
-	  this.eventForm.reset()
-	  this.eventForm.get('isAllDay')?.setValue(true)
+	  if(update){
+		this.scheduleService.updateScheduleItem(newEvent).subscribe(
+			(response) => {
+			  console.log('Event added successfully:', response);
+			  this.loadScheduleItems(); // Refresh the list of schedule items
+			  this.updateCalendar(); // Refresh the calendar
+			},
+			(error) => {
+			  console.error('Error adding event:', error);
+			}
+		  );
+	  } else {
+		this.scheduleService.addScheduleItem(newEvent).subscribe(
+			(response) => {
+			  console.log('Event added successfully:', response);
+			  this.loadScheduleItems(); // Refresh the list of schedule items
+			  this.updateCalendar(); // Refresh the calendar
+			},
+			(error) => {
+			  console.error('Error adding event:', error);
+			}
+		  );
+	  }
+	  this.resetForm();
 	  this.modalService.dismissAll("cause");
 	}
   }
