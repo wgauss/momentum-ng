@@ -179,7 +179,22 @@ export class CalendarComponent implements OnInit {
 
     this.modalService.open(addEvent, { centered: true });
   }
-
+  removeEvent(event:ScheduleItem){
+	if(event.id){
+		this.scheduleService.deleteScheduleItem(event.id?.toString()?? '').subscribe((response) => {
+			console.log('Event removed successfully:', response);
+			this.loadScheduleItems(); // Refresh the list of schedule items
+			this.updateCalendar(); // Refresh the calendar
+		  },
+		  (error) => {
+			console.error('Error adding event:', error);
+		  })
+		
+	} else {
+		console.log("omg!")
+	}
+	this.updateCalendar()
+  }
   lerp(start: number, end: number, t: number): number {
     return start + (end - start) * t;
   }
@@ -274,9 +289,6 @@ export class CalendarComponent implements OnInit {
     }
   }
   onSubmit(): void {
-    console.log('Submit function called');
-    console.log('Form status:', this.eventForm.status);
-    console.log('Form value:', this.eventForm.value);
     if (this.eventForm.valid) {
       if(!this.eventForm.get('isAllDay')?.value){
         let fromTime = (document.getElementById("hourFrom") as HTMLInputElement).value + ":" + (document.getElementById("minuteFrom") as HTMLInputElement).value;
@@ -299,7 +311,6 @@ export class CalendarComponent implements OnInit {
         this.eventForm.get('recurrenceFrequency')?.setValue("");
       }
       this.eventForm.get('color')?.setValue(this.color);
-      console.log(this.eventForm.value);
 	  let newEvent: ScheduleItem = {
 		title: this.eventForm.get('title')?.value,
 		description: this.eventForm.get('description')?.value,
@@ -309,7 +320,6 @@ export class CalendarComponent implements OnInit {
 		reccurring: this.eventForm.get('recurrenceFrequency')?.value,
 		color: this.eventForm.get('color')?.value
 	  }
-	  console.log('Event to submit:', newEvent);
 	  this.scheduleService.addScheduleItem(newEvent).subscribe(
 		(response) => {
 		  console.log('Event added successfully:', response);
@@ -320,7 +330,7 @@ export class CalendarComponent implements OnInit {
 		  console.error('Error adding event:', error);
 		}
 	  );
-      // Handle form submission
-    }
+	  this.modalService.dismissAll("cause");
+	}
   }
 }

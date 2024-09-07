@@ -184,7 +184,7 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 										<button ngbDropdownItem class="dropDownItem">Duplicate</button>
 										<button ngbDropdownItem class="dropDownItem">Move</button>
 										<div class="dropdown-divider"></div>
-										<button ngbDropdownItem class="dropDownItem">Delete</button>
+										<button ngbDropdownItem class="dropDownItem" (click)="removeEvent(event)">Delete</button>
 									</div>
 								</div>
 							</div>
