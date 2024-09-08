@@ -125,12 +125,13 @@ export class CalendarComponent implements OnInit {
       const newRange = Number(input.value);
       const newComputedHeight = this.height / newRange;
 
-    this.animateLerp(this.computedHeight, newComputedHeight, .333, (value) => {
+    /* this.animateLerp(this.computedHeight, newComputedHeight, .333, (value) => {
       this.computedHeight = value;
       this.updateCalendar();
-    });
-    
+    }); */
+    this.computedHeight = newComputedHeight;
     this.range = newRange;
+	this.updateCalendar();
   }
   
   setRecurringType(event: Event): void {
