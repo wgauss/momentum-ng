@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CalendarComponent } from "./calendar/calendar.component";
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
 import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CalendarComponent, HomeComponent, HttpClientModule],
+  imports: [RouterOutlet, FormsModule,  HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -23,5 +21,14 @@ export class AppComponent {
 	}
 	gotToCalendar(){
 		this.router.navigate(['/calendar']);
+	}
+	goToGoals(){
+		this.router.navigate(['/goals']);
+	}
+	goToFinCalc(){
+		this.router.navigate(['/fincalc']);
+	}
+	goToJaxBrain(){
+		this.router.navigate(['/jaxbrain']);
 	}
 }

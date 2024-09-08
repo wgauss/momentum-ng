@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, TemplateRef } from '@angular/core';
-import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, eachDayOfInterval } from 'date-fns';
+import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, eachDayOfInterval, differenceInDays, differenceInMonths, differenceInYears} from 'date-fns';
 import { NgbModal, NgbDropdownModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { enUS, id } from 'date-fns/locale';
 import { CommonModule } from '@angular/common';
@@ -174,14 +174,59 @@ export class CalendarComponent implements OnInit {
   }
 
   checkEventDay(event: ScheduleItem, day: Date): boolean {
-    if (!event.date) {
-      return false;
-    }
-    const eventDate = new Date(event.date);
-    const checkDate = new Date(day);
-    return ( eventDate.toLocaleDateString() == checkDate.toLocaleDateString() ) ;
+	if (!event.date) {
+	  return false;
+	}
+  
+	const eventDate = new Date(event.date);
+	const checkDate = new Date(day);
+  
+	// Check if the event date matches the check date
+	if (eventDate.toLocaleDateString() === checkDate.toLocaleDateString()) {
+	  return true;
+	}
+  
+	// Handle recurring events
+	if (event.isRecurring && event.reccurring) {
+	  // Get the weekday name of the checkDate
+	  const checkDayOfWeek = format(checkDate, "EEEE");
+  
+	  // Handle fixed recurrence like 'Everyday' and specific weekdays
+	  if (event.reccurring === 'Everyday') {
+		return true;
+	  } else if (event.reccurring === checkDayOfWeek) {
+		return true;
+	  } else {
+		// Handle custom recurrence like 'Every 3 Days'
+		const recurrencePattern = event.reccurring.match(/Every (\d+) (\w+)/);
+		if (recurrencePattern) {
+		  const number = parseInt(recurrencePattern[1], 10);
+		  const unit = recurrencePattern[2];
+  
+		  switch (unit) {
+			case 'seconds':
+			  // Not commonly used for long-term events
+			  return false;
+			case 'Hours':
+			  // This requires a more complex comparison involving time as well as date
+			  return false;
+			case 'Days':
+			  return differenceInDays(checkDate, eventDate) % number === 0;
+			case 'Months':
+			  const monthsDiff = differenceInMonths(checkDate, eventDate);
+			  return monthsDiff % number === 0;
+			case 'Years':
+			  const yearsDiff = differenceInYears(checkDate, eventDate);
+			  return yearsDiff % number === 0;
+			default:
+			  return false;
+		  }
+		}
+	  }
+	}
+  
+	return false;
   }
-
   loadScheduleItems(): void {
     this.scheduleService.getScheduleItems().subscribe(items => this.events = items);
   }
@@ -195,6 +240,7 @@ export class CalendarComponent implements OnInit {
 	this.event.endTime = eventObj.endTime ?? '';
 	this.event.location = eventObj.location ?? '';
 	this.event.isAllDay = eventObj.isAllDay ?? false;
+	this.event.isRecurring = eventObj.isRecurring ?? false;
     this.modalService.open(content, { centered: true });
   }
   

@@ -1,22 +1,10 @@
-<!-- <div class="">
-		<a routerLink="/"><button>Overview</button></a>
-		
-		<a routerLink="/calendar"><button>Calendar</button></a>
-		<!-- it includes the schedule component, although arguably should be in the quick actions here as well 
-	<button>FinCalc</button>
-	<button>JaxBrain</button>
-	<button>Health</button>
-</div>
-<!-- on hover it should pop up a thing where there are quick actions or information to help show overview 
- 
-	Through the use of spilt buttons
-	--> 
 <nav>
 	<button class="buttonGhost" (click)="goHomeET()">Home</button>
 	<button class="buttonGhost" (click)="gotToCalendar()">Calendar</button>
-	<button class="buttonGhost">Goals</button>
-	<button class="buttonGhost">JaxBrain</button>
-	<button class="buttonGhost">FinCalc</button>
+	<button class="buttonGhost" (click)="goToGoals()">Goals</button>
+	<button class="buttonGhost" (click)="goToJaxBrain()">JaxBrain</button>
+	<button class="buttonGhost" (click)="goToFinCalc()">FinCalc</button>
+	<button class="buttonGhost">⚙️</button>
 </nav>
 <hr/>
 <router-outlet />
