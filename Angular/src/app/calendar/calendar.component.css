@@ -83,7 +83,13 @@
 .today{
 	background: transparent;
 	background-color: rgba(0, 182, 254, 0.626);
+	transition: font-size .5s ease;
 }
+.calendar-day:hover .today  {
+	height: 24px;
+	font-size: 14px;
+}
+
 .calendarEventsForDay{
 	overflow-y: auto;
 	height: fit-content;

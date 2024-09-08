@@ -152,9 +152,9 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 	<div class="calendar">
 	  <div *ngFor="let week of calendar" class="calendar-week">
 		<div *ngFor="let day of week" class="calendar-day" [style.height.px]="computedHeight" >
-			<div class="calendar-top-bar">
+			<div class="calendar-top-bar" [ngClass]="{'today': day.toLocaleDateString() == referenceDate.toLocaleDateString()}">
 				<span class="calendar-number" *ngIf="day.toLocaleDateString() != referenceDate.toLocaleDateString()">{{ formatDay(day) }}</span>
-				<span  class="today" *ngIf="day.toLocaleDateString() == referenceDate.toLocaleDateString()">{{ day.toLocaleDateString() }} &nbsp; <i>Today</i></span>
+				<span   *ngIf="day.toLocaleDateString() == referenceDate.toLocaleDateString()">{{ day.toLocaleDateString() }} &nbsp; <i>Today</i></span>
 				<span ngbDropdown placement="top-end" class="d-inline-block">
 					<button id="dropdownBasic2" ngbDropdownToggle></button>
 					<div ngbDropdownMenu aria-labelledby="dropdownBasic2">
