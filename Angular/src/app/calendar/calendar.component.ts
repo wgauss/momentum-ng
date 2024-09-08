@@ -32,7 +32,19 @@ export class CalendarComponent implements OnInit {
   height: number = 500; 
   computedHeight: number = this.height / this.range; // Height per calendar cell
   events: ScheduleItem[] = [] 
-  event = {title: "", desc: "", date: "", time: "", exists: false, id: ""}
+  event = {
+	title: "", 
+	desc: "", 
+	date: "", 
+	time: "", 
+	exists: false, 
+	id: "",
+	color: "",
+	startTime: "",
+	endTime: "",
+	location: "",
+	isAllDay: false
+}
   reminderFlag = true;
   reccuringType = "";
   eventForm: FormGroup;
@@ -177,6 +189,11 @@ export class CalendarComponent implements OnInit {
     this.event.title = eventObj.title;
     this.event.desc = eventObj.description;
     this.event.date = eventObj.date ? format(eventObj.date, 'MMMM / d / yyyy') : '';
+	this.event.color = eventObj.color ?? '';
+	this.event.startTime = eventObj.startTime ?? '';
+	this.event.endTime = eventObj.endTime ?? '';
+	this.event.location = eventObj.location ?? '';
+	this.event.isAllDay = eventObj.isAllDay ?? false;
     this.modalService.open(content, { centered: true });
   }
   
