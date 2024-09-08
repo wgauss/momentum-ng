@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ScheduleService } from './schedule.service';
 import { routes } from './app.routes';
+import { GoalService } from './goals.service';
 export const appConfig: ApplicationConfig = {
   providers: [
 	provideRouter(routes),
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
 	HttpClientModule,
 	BrowserModule,
 	ScheduleService,
+	GoalService
   ],
 };

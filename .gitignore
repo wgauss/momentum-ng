@@ -51,3 +51,4 @@ Thumbs.db
 
 #files within which are personal or not ready to be implemented
 rails-api/db/jaxBrain.json
+rails-api/db/schedule.json

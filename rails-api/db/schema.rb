@@ -10,11 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_28_235140) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_08_224752) do
+  create_table "goals", force: :cascade do |t|
+    t.string "title"
+    t.text "mainObjective"
+    t.date "targetDate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "schedule_items", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "sub_goals", force: :cascade do |t|
+    t.string "title"
+    t.float "current_value"
+    t.float "target_value"
+    t.string "unit"
+    t.integer "goal_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_sub_goals_on_goal_id"
+  end
+
+  add_foreign_key "sub_goals", "goals"
 end

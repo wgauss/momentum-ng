@@ -1,8 +1,8 @@
 [
   {
     "title": "Skin Doctor Appt",
-	"location": "you know where ;)",
-    "description": "",
+    "location": "you know where ;)",
+    "description": "head, knee",
     "date": "2024-10-01",
     "startTime": "12:00",
     "endTime": "13:00",
@@ -17,7 +17,7 @@
   },
   {
     "title": "School Starts",
-	"location": "https://ce.uci.edu/login",
+    "location": "https://ce.uci.edu/login",
     "description": "Be very sure to read up on:\n\nEmbedded Software Primer : D E S | r ' S / SE\nDigital Design and Computer Architecture: ARM Edition by (((harris)))",
     "date": "2024-09-23",
     "isAllday": false,
@@ -30,5 +30,37 @@
 
     ],
     "id": "6d2e1d57-cea4-4e8d-be7e-cb76cdcad122"
+  },
+  {
+    "title": "Mason's Birthday",
+    "description": "",
+    "date": "2024-10-09",
+    "startTime": "",
+    "endTime": "",
+    "reccurring": "",
+    "color": "#00deff",
+    "location": "",
+    "isAllDay": true,
+    "isRecurring": false,
+    "reminders": [
+
+    ],
+    "id": "d527fa4d-a2b2-4dc3-81f7-58d85936074f"
+  },
+  {
+    "title": "🥳",
+    "description": null,
+    "date": "2025-04-29",
+    "startTime": null,
+    "endTime": null,
+    "reccurring": "",
+    "color": "",
+    "location": null,
+    "isAllDay": true,
+    "isRecurring": null,
+    "reminders": [
+
+    ],
+    "id": "5ff6c591-25c1-457c-a9c0-16653dc3a308"
   }
 ]

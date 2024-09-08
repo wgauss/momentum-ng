@@ -17,7 +17,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, NgbDropdownModule, NgbTypeaheadModule, FormsModule, NgxBootstrapIconsModule, ReactiveFormsModule, ColorPickerModule ],
+  imports: [CommonModule, NgbDropdownModule, NgbTypeaheadModule, FormsModule, NgxBootstrapIconsModule, ReactiveFormsModule, ColorPickerModule ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
   providers: [ScheduleService]

@@ -1,6 +1,29 @@
-<div>
-	<h1>{{ goal.title }}</h1>
-	<h2>Main Objective: {{ goal.mainObjective }}</h2>
-	<pre>{{ progressSummary }}</pre>
+<!-- goals.component.html -->
+<div class="goals-container">
+	<h2>Goals List</h2>
+  
+	<div *ngIf="goals.length === 0">
+	  <p>No goals available.</p>
+	</div>
+  
+	<ul *ngIf="goals.length > 0">
+	  <li *ngFor="let goal of goals">
+		<h3>{{ goal.title }}</h3>
+		<p>Main Objective: {{ goal.mainObjective }}</p>
+		<p>Target Date: {{ goal.target_date }}</p>
+  
+		<h4>Sub-Goals:</h4>
+		<ul>
+		  <li *ngFor="let subGoal of goal.sub_goals">
+			{{ subGoal.title }}: {{ subGoal.currentValue }} / {{ subGoal.targetValue }} {{ subGoal.unit }}
+		  </li>
+		</ul>
+	  </li>
+	</ul>
+  
+	<div *ngIf="goals.length > 0">
+	  <h3>Progress Summary</h3>
+	  <pre>{{ progressSummary }}</pre> <!-- Use <pre> to preserve whitespace in summary -->
+	</div>
   </div>
   

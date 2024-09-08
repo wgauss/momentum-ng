@@ -7,6 +7,11 @@ class CreateScheduleItems < ActiveRecord::Migration[7.2]
       t.string :title
       t.text :description
 
+	  create_table :goals do |t|
+		t.string :title
+		t.text :mainObjective
+		t.date :targetDate
+  
       t.timestamps
     end
   end

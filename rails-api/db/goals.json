@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Lose Weight and Improve Fitness",
+    "mainObjective": "Lose 40 lbs by December 2024 and improve fitness levels",
+    "targetDate": "2024-12-31",
+    "sub_goals": [
+      {
+        "title": "Weight Loss",
+        "currentValue": 10,
+        "targetValue": 40,
+        "unit": " lbs"
+      },
+      {
+        "title": "Daily Workout",
+        "currentValue": 3.75,
+        "targetValue": 5,
+        "unit": " hours"
+      },
+      {
+        "title": "Fasting Hours",
+        "currentValue": 18,
+        "targetValue": 18,
+        "unit": " hours"
+      },
+      {
+        "title": "Protein Intake",
+        "currentValue": 180,
+        "targetValue": 180,
+        "unit": " grams"
+      }
+    ],
+    "id": "881ece2f-2d24-4580-bf4f-8d27613333e6"
+  }
+]
