@@ -3,6 +3,10 @@ html{
 	background-color: #212121;
 	color: white;
 }
+body{
+	background-color: #212121;
+	color: white;
+}
 button {
 	all: unset; /* Remove all inherited styles */
 	display: inline-block; /* Make it behave like a block element while allowing inline styling */
