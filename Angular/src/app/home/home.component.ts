@@ -9,5 +9,5 @@ import { CalendarComponent } from '../calendar/calendar.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
+	
 }

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { CalendarComponent } from "./calendar/calendar.component";
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -13,5 +15,13 @@ import { HomeComponent } from './home/home.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'momentum-ng';
+	constructor(private router: Router) { }
+
+	title = 'momentum-ng';
+	goHomeET(){
+		this.router.navigate(['/']);
+	}
+	gotToCalendar(){
+		this.router.navigate(['/calendar']);
+	}
 }
