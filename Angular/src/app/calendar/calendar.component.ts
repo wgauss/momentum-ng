@@ -43,7 +43,8 @@ export class CalendarComponent implements OnInit {
 	startTime: "",
 	endTime: "",
 	location: "",
-	isAllDay: false
+	isAllDay: false,
+	isRecurring: false
 }
   reminderFlag = true;
   reccuringType = "";
@@ -178,7 +179,7 @@ export class CalendarComponent implements OnInit {
     }
     const eventDate = new Date(event.date);
     const checkDate = new Date(day);
-    return eventDate.toLocaleDateString() == checkDate.toLocaleDateString();
+    return ( eventDate.toLocaleDateString() == checkDate.toLocaleDateString() ) ;
   }
 
   loadScheduleItems(): void {
