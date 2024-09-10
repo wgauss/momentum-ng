@@ -133,17 +133,15 @@ export class CalendarComponent implements OnInit {
     this.updateCalendar();
   }
   
-  onRangeChange(event: Event): void {
-      const input = event.target as HTMLInputElement;
-      const newRange = Number(input.value);
-      const newComputedHeight = this.height / newRange;
+  onViewChange(num:number): void {
+      const newComputedHeight = this.height / num;
 
     /* this.animateLerp(this.computedHeight, newComputedHeight, .333, (value) => {
       this.computedHeight = value;
       this.updateCalendar();
     }); */
     this.computedHeight = newComputedHeight;
-    this.range = newRange;
+    this.range = num;
 	this.updateCalendar();
   }
   

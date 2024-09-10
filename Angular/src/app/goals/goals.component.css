@@ -1,3 +1,39 @@
 *{
 	color: white;
 }
+input, textarea{
+	color: black;
+}
+.goalFormContainer {
+	display: block;
+	justify-content: center;
+	border: 1px white solid; 
+	border-radius: 5px; 
+	padding: 5px;
+
+}
+.topGoalContainer{
+	display: block;
+	justify-content: center;
+}
+.topGoalInput{
+	display: flex; 
+	justify-content: center;
+	margin: 10px;
+}
+.subGoalContainer{
+	border: 1px solid white;
+	border-radius: 5px;
+	padding-top: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
+
+}
+.subGoalInputContainer{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.subGoalInput {
+	width: 33%;
+}

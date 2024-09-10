@@ -3,7 +3,7 @@
     "title": "Lose Weight and Improve Fitness",
     "mainObjective": "Lose 40 lbs by December 2024 and improve fitness levels",
     "targetDate": "2024-12-31",
-    "sub_goals": [
+    "subGoals": [
       {
         "title": "Weight Loss",
         "currentValue": 10,

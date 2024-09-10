@@ -1,29 +1,80 @@
 <!-- goals.component.html -->
 <div class="goals-container">
-	<h2>Goals List</h2>
+  <h2>Goals List</h2>
   
-	<div *ngIf="goals.length === 0">
-	  <p>No goals available.</p>
-	</div>
-  
-	<ul *ngIf="goals.length > 0">
-	  <li *ngFor="let goal of goals">
-		<h3>{{ goal.title }}</h3>
-		<p>Main Objective: {{ goal.mainObjective }}</p>
-		<p>Target Date: {{ goal.target_date }}</p>
-  
-		<h4>Sub-Goals:</h4>
-		<ul>
-		  <li *ngFor="let subGoal of goal.sub_goals">
-			{{ subGoal.title }}: {{ subGoal.currentValue }} / {{ subGoal.targetValue }} {{ subGoal.unit }}
-		  </li>
-		</ul>
-	  </li>
-	</ul>
-  
-	<div *ngIf="goals.length > 0">
-	  <h3>Progress Summary</h3>
-	  <pre>{{ progressSummary }}</pre> <!-- Use <pre> to preserve whitespace in summary -->
-	</div>
+  <div *ngIf="goals.length === 0">
+    <p>No goals available.</p>
   </div>
+
+  <ul *ngIf="goals.length > 0">
+    <li *ngFor="let goal of goals">
+      <h3>{{ goal.title }} <button class="btn btn-danger">Remove</button></h3>
+      <p>Main Objective: {{ goal.mainObjective }}</p>
+      <p>Target Date: {{ goal.targetDate }}</p>
+
+      <h4>Sub-Goals:</h4>
+      <ul>
+        <li *ngFor="let subGoal of goal.subGoals">
+          {{ subGoal.title }}: {{ subGoal.currentValue }} / {{ subGoal.targetValue }} {{ subGoal.unit }} ({{(subGoal.currentValue / subGoal.targetValue) * 100}}%)
+        </li>
+      </ul>
+    </li>
+  </ul>
   
+  <div *ngIf="goals.length > 0">
+    <h3>Progress Summary</h3>
+    <p>{{ progressSummary }}</p>
+  </div>
+</div>
+
+
+  <div style="display: flex; justify-content: center; ">
+	<form [formGroup]="goalForm">
+		<div class="goalFormContainer">
+			<div class="topGoalContainer">
+				<div class="topGoalInput">
+					<input placeholder="Title" id="title" formControlName="title" style="width: 100%;"/>
+				</div>
+				<div class="topGoalInput">
+					<textarea placeholder="Main Objective" id="mainObjective" formControlName="mainObjective" style="width: 100%;"></textarea>
+				</div>
+				<div class="topGoalInput" >
+					<label for="targetDate">Target Date:</label>
+  					<input id="targetDate" type="date" formControlName="targetDate">
+				</div>
+			</div>
+
+			<div formArrayName="subGoals">
+				<div *ngFor="let subGoal of subGoals.controls; let i = index" class="subGoalContainer">
+				  <div [formGroupName]="i">
+					<div>
+						<input id="subGoalTitle{{i}}" formControlName="title" placeholder="Sub-Goal Title" style="width: 100%;">
+					</div>
+					<hr/>
+					<div class="subGoalInputContainer">
+						<label for="currentValue{{i}}">Current Value:</label>
+						<input class="subGoalInput" id="currentValue{{i}}" type="number" formControlName="currentValue">
+					</div>
+					<div class="subGoalInputContainer">
+						<label for="targetValue{{i}}">Target Value:</label>
+						<input class="subGoalInput" id="targetValue{{i}}" type="number" formControlName="targetValue">
+					</div>
+					<div class="subGoalInputContainer">
+						<label for="unit{{i}}">Unit:</label>
+						<input class="subGoalInput" id="unit{{i}}" formControlName="unit">
+					</div>
+					<div class="topGoalInput">
+						<button type="button" (click)="removeSubGoal(i)" class="btn btn-danger">Remove Sub-Goal</button>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <div class="topGoalInput">
+				<button type="button" (click)="addSubGoal()" class="buttonFull">Add Sub-Goal</button>
+			</div>
+			<div class="topGoalInput">
+				<button type="submit" class="btn btn-primary" [disabled]="checkValidation()" (click)="onSubmit()">Submit</button>
+			</div>
+		</div>
+	</form>
+  </div>

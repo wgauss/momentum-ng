@@ -191,10 +191,6 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 									</div>
 								</div>
 							</div>
-							<div class="eventDesc" *ngIf="range <= 3">
-								<hr style="margin: 0; margin-bottom: 5px;"/>
-								{{event.description}}
-							</div>
 						</div>
 					</div>
 				</div>
@@ -204,6 +200,10 @@ The dropdown: view events for day, add event, remove event, remove all events (i
 	  </div>
 	</div>
 	<div class="topDisplay" >
-		<input type="number" min="1" max="5" [value]="range" (change)="onRangeChange($event)" class="year-input"/>
+		<button (click)="onViewChange(5)" class="buttonFull">Month View</button>
+		<button (click)="onViewChange(4)" class="buttonFull">4 Week View</button>
+		<button (click)="onViewChange(3)" class="buttonFull">3 Week View</button>
+		<button (click)="onViewChange(2)" class="buttonFull">2 Week View</button>
+		<button (click)="onViewChange(1)" class="buttonFull">Week View</button>
 	  </div>
   </div>

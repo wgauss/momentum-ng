@@ -83,7 +83,7 @@ module Api
 	  def goal_params
 		# Permit top-level attributes and nested attributes
 		params.permit(:title, :mainObjective, :targetDate,
-					  sub_goals: [:title, :currentValue, :targetValue, :unit])
+					  subGoals: [:title, :currentValue, :targetValue, :unit])
 			.to_h
 	  end
 	end
