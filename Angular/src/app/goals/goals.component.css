@@ -4,10 +4,13 @@
 input, textarea{
 	color: black;
 }
+form, label{
+	color: black;
+}
+
 .goalFormContainer {
 	display: block;
 	justify-content: center;
-	border: 1px white solid; 
 	border-radius: 5px; 
 	padding: 5px;
 
@@ -15,6 +18,7 @@ input, textarea{
 .topGoalContainer{
 	display: block;
 	justify-content: center;
+	width: 100%;
 }
 .topGoalInput{
 	display: flex; 
@@ -22,7 +26,7 @@ input, textarea{
 	margin: 10px;
 }
 .subGoalContainer{
-	border: 1px solid white;
+	border: 1px solid black;
 	border-radius: 5px;
 	padding-top: 15px;
 	padding-left: 15px;
@@ -34,6 +38,36 @@ input, textarea{
 	display: flex;
 	justify-content: space-between;
 }
-.subGoalInput {
+.subGoalInputForm {
 	width: 33%;
+}
+
+.goalsContainer{
+	display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+	color: black;
+}
+.goalsBody{
+	width: 100%;
+}
+.goalsChild{
+	display: flex;
+	justify-content: center;
+	
+}
+.goal{
+	padding: 1rem;
+	border: 1px solid white;
+	border-radius: 8px;
+}
+.subGoalInput {
+	width: 15%;
+}
+.goalProgressSummary{
+	text-align: center;
+	width: 33%;
+}
+.dropDownItem{
+	color: black;
 }

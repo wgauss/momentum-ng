@@ -27,6 +27,14 @@ export class GoalService {
 	  catchError(this.handleError<Goal>('addGoal'))
 	);
   }
+
+  deleteGoal(id: string): Observable<Goal[]> {
+	const url = `${this.apiUrl}/${id}`;
+	return this.http.delete<Goal[]>(url).pipe(
+	  catchError(this.handleError<Goal[]>('deleteGoal', []))
+	);
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
@@ -65,12 +73,8 @@ export class GoalService {
     const estimatedCompletion = (averageProgress >= 100) ? 'Goal achieved' : `On track to complete in ${remainingDays} days`;
   
     return `
-      Goal Title: ${goal.title}
-      Main Objective: ${goal.mainObjective}
-      Progress:
-      ${progressDetails.join('\n')}
-      Overall Progress: ${averageProgress.toFixed(2)}%
-      Estimated Completion: ${estimatedCompletion}
+      Overall Progress: ${averageProgress.toFixed(2)}%\n
+      Estimated Completion: ${estimatedCompletion}\n
     `;
   }
 }

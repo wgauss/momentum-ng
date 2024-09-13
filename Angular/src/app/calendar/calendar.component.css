@@ -129,6 +129,9 @@
 .dropDownItem {
 	width: 125px;
 }
+.dropDownItem:hover{
+	background-color: rgb(127, 178, 255);
+}
 
 .range-control {
 	display: flex;

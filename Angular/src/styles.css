@@ -6,6 +6,13 @@ html{
 body{
 	background-color: #212121;
 }
+hr{
+	color: whitesmoke;
+}
+.hrContainer{
+	display: flex;
+	justify-content: center;
+}
 button {
 	all: unset; /* Remove all inherited styles */
 	display: inline-block; /* Make it behave like a block element while allowing inline styling */
@@ -79,4 +86,14 @@ button:disabled, button:disabled:hover {
 	background-color: rgba(135, 206, 235, 0.5);
 	user-select: none;
   }
-  
+.dropDownItem{
+	width: 150px;
+	color: black;
+}
+.dropDownItem:hover{
+	background-color: rgb(127, 178, 255);
+}
+.dropDownRemove:hover{
+	background-color: rgb(255, 0, 0);
+	cursor: not-allowed;
+}

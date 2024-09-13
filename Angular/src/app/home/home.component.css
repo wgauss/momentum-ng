@@ -2,3 +2,6 @@ body{
 	display: flex;
 	justify-content: center;
 }
+hr{
+	width: 95%;
+}

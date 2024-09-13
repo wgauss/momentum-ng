@@ -59,21 +59,21 @@ export class CalendarComponent implements OnInit {
   activeMinute: string = "From";
   color: any;
   constructor(private scheduleService: ScheduleService, private fb: FormBuilder) {
-    this.eventForm = this.fb.group({
-      title: ['', Validators.required],
-      location: [''],
-      description: [''],
-      isAllDay: [true],
-      startTime: [''],
-      endTime: [''],
-      isRecurring: [false],
-      recurrenceFrequency: [''],
-      reminders: this.fb.array([]),  // Initialize FormArray for reminders
-	  color: '',
-	  hourFrom:'',
-	  minuteFrom: '',
-	  hourTo:'',
-	  minuteTo: '',
+	this.eventForm = this.fb.group({
+	title: ['', Validators.required],
+	location: [''],
+	description: [''],
+	isAllDay: [true],
+	startTime: [''],
+	endTime: [''],
+	isRecurring: [false],
+	recurrenceFrequency: [''],
+	reminders: this.fb.array([]),  // Initialize FormArray for reminders
+	color: '',
+	hourFrom:'',
+	minuteFrom: '',
+	hourTo:'',
+	minuteTo: '',
 	
 	});
   }

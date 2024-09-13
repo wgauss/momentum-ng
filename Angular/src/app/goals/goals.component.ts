@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, TemplateRef } from '@angular/core';
 import { GoalService } from '../goals.service';
 import { Goal, SubGoal } from '../goals.model';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
+import { NgbModal, NgbDropdownModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-goals',
   standalone: true,
   templateUrl: './goals.component.html',
   styleUrls: ['./goals.component.css'],
-  imports: [HttpClientModule, CommonModule, ReactiveFormsModule],
+  imports: [HttpClientModule, CommonModule, ReactiveFormsModule,NgbDropdownModule],
   providers: [GoalService]
 })
 export class GoalsComponent implements OnInit {
   goals: Goal[] = [];
   progressSummary: string = '';
   goalForm: FormGroup;
-
+  private modalService = inject(NgbModal);
   constructor(private goalService: GoalService, private fb: FormBuilder) {
     this.goalForm = this.fb.group({
       title: ['', Validators.required],
@@ -26,6 +27,9 @@ export class GoalsComponent implements OnInit {
       subGoals: this.fb.array([]),
       targetDate: ['' , Validators.required],
     });
+  }
+  ngOnInit(): void {
+    this.getGoals()
   }
   getGoals(){
 	this.goalService.getGoals().subscribe(
@@ -40,8 +44,25 @@ export class GoalsComponent implements OnInit {
 		error => console.error('Error fetching goals:', error)
 	  );
   }
-  ngOnInit(): void {
-    this.getGoals()
+  removeGoal(goal:Goal){
+	if(goal.id){
+		this.goalService.deleteGoal(goal.id?.toString()?? '').subscribe((response) => {
+			console.log('Goal removed successfully:', response);
+			this.getGoals()
+		},
+		  (error) => {
+			console.error('Error adding event:', error);
+		  })
+		
+	} else {
+		console.log("omg!")
+	}
+  }
+  openCreateEditGoalModal(CreateGoalModal:TemplateRef<any>, goal?:Goal){
+	if(goal){
+		//do something
+	}
+    this.modalService.open(CreateGoalModal, { centered: true });
   }
 
   // Create a new SubGoal FormGroup
@@ -68,6 +89,7 @@ export class GoalsComponent implements OnInit {
   removeSubGoal(index: number): void {
     this.subGoals.removeAt(index);
   }
+  
   checkValidation(): boolean{
 	let subGoalFlag: boolean = false;
 	
